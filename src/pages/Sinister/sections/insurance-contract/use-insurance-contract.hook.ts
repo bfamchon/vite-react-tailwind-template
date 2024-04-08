@@ -1,7 +1,6 @@
 import { RootState, useAppDispatch } from '@/create-store';
 import { InsuranceContract, SinisterForm } from '@/modules/sinister/entity/sinister.domain-model';
 import { InsuranceContractForm } from '@/modules/sinister/form/insuranceContract.form';
-import { FakeCompaniesGateway } from '@/modules/sinister/infrastructure/fake-companies.gateway';
 import { companiesFetchingStatusSelector } from '@/modules/sinister/selectors/companies.selector';
 import { selectForm } from '@/modules/sinister/selectors/form.selector';
 import { fetchCompanies } from '@/modules/sinister/use-cases/fetch-companies.use-case';
@@ -23,7 +22,7 @@ export const useInsuranceContract = () => {
     setForm(insuranceContractForm.current.updateField(form, key, value));
   }
 
-  const insuranceContractForm = useRef(new InsuranceContractForm(new FakeCompaniesGateway()));
+  const insuranceContractForm = useRef(new InsuranceContractForm());
 
   const dispatch = useAppDispatch();
 
