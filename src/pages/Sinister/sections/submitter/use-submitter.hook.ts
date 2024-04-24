@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/create-store';
+import { useAppDispatch } from '@/global-store/use-app-dispatch';
 import { FormStep, SinisterForm, Submitter } from '@/modules/sinister/entity/sinister.domain-model';
 import { SubmitterForm } from '@/modules/sinister/form/submitter.form';
 import { selectForm } from '@/modules/sinister/selectors/form.selector';

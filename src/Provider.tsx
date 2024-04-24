@@ -1,10 +1,12 @@
-import { AppStore } from '@/create-store';
-import { AppRouter } from '@/router';
+import { app } from '@/App';
+import { DependenciesProvider } from '@/DependenciesProvider';
 import { Provider as ReduxProvider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 
-export const Provider = ({ router, store }: { router: AppRouter; store: AppStore }) => (
-  <ReduxProvider store={store}>
-    <RouterProvider router={router} />
+export const Provider = () => (
+  <ReduxProvider store={app.store}>
+    <DependenciesProvider dependencies={app.dependencies}>
+      <RouterProvider router={app.router} />
+    </DependenciesProvider>
   </ReduxProvider>
 );

@@ -1,1 +1,7 @@
 pnpm test
+
+if pnpm circular-deps; then
+  echo "✔️  Everything is fine, well played !"
+else
+  echo "⚠️  Circular dependencies errors are met, please fix them !"
+fi

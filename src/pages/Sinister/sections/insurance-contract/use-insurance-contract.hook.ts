@@ -1,11 +1,14 @@
-import { RootState, useAppDispatch } from '@/create-store';
+import { useAppDispatch } from '@/global-store/use-app-dispatch';
 import { InsuranceContract, SinisterForm } from '@/modules/sinister/entity/sinister.domain-model';
 import { InsuranceContractForm } from '@/modules/sinister/form/insuranceContract.form';
-import { companiesFetchingStatusSelector } from '@/modules/sinister/selectors/companies.selector';
+import {
+  companiesFetchingStatusSelector,
+  companiesSelector
+} from '@/modules/sinister/selectors/companies.selector';
 import { selectForm } from '@/modules/sinister/selectors/form.selector';
 import { fetchCompanies } from '@/modules/sinister/use-cases/fetch-companies.use-case';
 import { setInsuranceContractForm } from '@/modules/sinister/use-cases/set-insurance-contract-form.use-case';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 export const useInsuranceContract = () => {
@@ -26,17 +29,15 @@ export const useInsuranceContract = () => {
 
   const dispatch = useAppDispatch();
 
-  const companies = useSelector((state: RootState) => state.sinister.companies.data);
+  const companies = useSelector(companiesSelector);
   const initialForm = useSelector(selectForm);
   const companiesFetchingStatus = useSelector(companiesFetchingStatusSelector);
-  const [form, setForm] = useState<SinisterForm>(initialForm);
-  useEffect(() => {
-    console.log('init');
-    if (companiesFetchingStatus === 'idle') {
-      dispatch(fetchCompanies());
-    }
-  }, [companiesFetchingStatus, dispatch]);
 
+  const [form, setForm] = useState<SinisterForm>(initialForm);
+
+  if (companiesFetchingStatus === 'idle') {
+    dispatch(fetchCompanies());
+  }
   return {
     companies,
     updateCompany: (value: string) => {

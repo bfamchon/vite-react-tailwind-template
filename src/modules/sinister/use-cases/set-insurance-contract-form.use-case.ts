@@ -1,4 +1,4 @@
-import type { AppDispatch } from '@/create-store';
+import { AppDispatch } from '@/global-store/use-app-dispatch';
 import type { SinisterForm } from '@/modules/sinister/entity/sinister.domain-model';
 import { sinisterActions } from '@/modules/sinister/store/sinister.slice';
 

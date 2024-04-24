@@ -1,25 +1,9 @@
-import { CompaniesGatewayInterface } from '@/modules/sinister/gateway/companies.gateway';
+import { Dependencies } from '@/global-store/dependencies';
+import { rootReducer } from '@/global-store/root-reducer';
+import { RootState } from '@/global-store/state-types';
 import { registerFetcherListeners } from '@/modules/sinister/store/fetcher.listener';
 import { registerSinisterFormStepListener } from '@/modules/sinister/store/sinister-form-step.listener';
-import { sinisterReducer } from '@/modules/sinister/store/sinister.slice';
-import {
-  Action,
-  Middleware,
-  ThunkDispatch,
-  combineReducers,
-  configureStore,
-  createListenerMiddleware,
-  isAction
-} from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-
-export type Dependencies = {
-  companiesGateway: CompaniesGatewayInterface;
-};
-
-const rootReducer = combineReducers({
-  sinister: sinisterReducer
-});
+import { Action, Middleware, configureStore, createListenerMiddleware, isAction } from '@reduxjs/toolkit';
 
 export const createStore = (dependencies: Dependencies, preloadedState?: Partial<RootState>) => {
   const actions: Action[] = [];
@@ -53,6 +37,3 @@ export const createStore = (dependencies: Dependencies, preloadedState?: Partial
 
 type AppStoreWithGetActions = ReturnType<typeof createStore>;
 export type AppStore = Omit<AppStoreWithGetActions, 'getActions'>;
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppDispatch = ThunkDispatch<RootState, Dependencies, Action>;
-export const useAppDispatch = () => useDispatch<AppDispatch>();
