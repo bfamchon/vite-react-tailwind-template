@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --ext ts,tsx --fix --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "pretty": "pretty-quick --staged",
-    "test": "vitest --config ./vitest.config.ts",
+    "test": "vitest run --config ./vitest.config.ts",
     "type-check": "tsc --noEmit",
     "circular-deps": "madge --extensions js,jsx,ts,tsx ./src --circular --ts-config tsconfig.json",
     "hook:pre-commit": "pnpm type-check && pnpm lint && pnpm pretty",
